@@ -1,37 +1,64 @@
 
 <template>
   <div class="sign">
-    <div class="g-signin2" id="google-signin-button"></div>
-  </div>  
+    <g-signin-button
+      :params="googleSignInParams"
+      @success="onSignInSuccess"
+      @error="onSignInError"
+    >Sign in with Google</g-signin-button>
+  </div>
 </template>
 
 <script>
+import Vue from "vue";
+import GSignInButton from "vue-google-signin-button";
+
+Vue.use(GSignInButton);
+
 export default {
   name: "Login",
-   mounted() {
-    gapi.signin2.render('google-signin-button', {
-      onsuccess: this.onSignIn
-    })
+  data() {
+    return {
+      IsSignedIn: false,
+      googleSignInParams: {
+        client_id:
+          "343052652845-6guo4uqflprlo0ta7f10jf449ueehfph.apps.googleusercontent.com"
+      }
+    };
   },
+
   methods: {
-    onSignIn: function(googleUser) {
-      var profile = googleUser.getBasicProfile();      
-      console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    onSignInSuccess(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log("ID: " + profile.getId());
       console.log("Name: " + profile.getName());
       console.log("Image URL: " + profile.getImageUrl());
-      console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-      this.$emit("userdetails",profile.getName(),profile.getImageUrl(),true);
-      
+      console.log("Email: " + profile.getEmail());
+      this.$emit("userdetails", profile.getName(), profile.getImageUrl(), true);
     },
-    
+    onSignInError(error) {
+      console.log("Error: ", error);
+    }
   }
 };
 </script>
 
 <style scoped>
-      .sign{
-        margin-top: 4%;
-    margin-left: 45%;
-    
-      }
+.sign {
+  text-align: center;
+  margin-top: 4%;
+}
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: cadetblue;
+  color: #fff;
+  width: 400px;
+  height: 65px;
+  font-size: 40px;
+  background-color: cadetblue;
+  cursor: pointer;
+}
 </style>

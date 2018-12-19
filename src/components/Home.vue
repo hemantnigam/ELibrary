@@ -204,7 +204,7 @@ export default {
         this.hasTableISBNData = false;
         var that=this;
       axios
-        .get("http://openlibrary.org/api/books", {
+        .get("https://openlibrary.org/api/books", {
           params: {
             bibkeys: "ISBN:" + that.search_detail,
             jscmd: "data",
@@ -324,16 +324,16 @@ dl {
   cursor: pointer;
 }
 .btn {
-  border-radius: 0px;
-  height: 35px;
-  border: 1px solid black;
+  border-radius: 0px !important;
+  height: 35px !important;
+  border: 1px solid black !important;
   background-color: white;
   color: black !important;
 }
 .btn:hover {
-  background-color: cadetblue;
+  background-color: cadetblue !important;
   color: white !important;
-  cursor: pointer;
+  cursor: pointer !important;
 }
 thead {
   background-color: cadetblue;
@@ -345,9 +345,10 @@ thead {
   margin: 0 auto;
 }
 .btn-secondary {
-  color: #fff;
-  background-color: none;
-  border-color: none;
+  color:black !important;
+  background-color: white !important;
+    border-color: black !important;
+    border-radius: 0px !important;
 }
 .mb-1,
 .my-1 {

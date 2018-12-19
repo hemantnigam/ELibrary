@@ -20,7 +20,7 @@ export default {
       this.$refs.header.username=username;
       this.$refs.header.profileURL=profileURL;
       this.$refs.header.loginstatus=loginstatus;
-      this.$router.push({path:'/home'});
+      this.$router.push('/home');
     }
   }
 };

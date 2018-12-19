@@ -31,34 +31,13 @@ export default {
       var that = this;
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function() {
-        console.log("User signed out.");
+        
+        console.log("User signed out.");        
+        that.loginstatus = false;      
         that.$router.push("/login");
-        that.loginstatus = false;
-        document.cookie.split(";").forEach(function(c) {
-          document.cookie = c
-            .replace(/^ +/, "")
-            .replace(
-              /=.*/,
-              "=;expires=" + new Date().toUTCString() + ";path=/"
-            );
-        });
       });
+      auth2.disconnect();
     },
-
-    attachSignin: function(element) {
-      console.log(element.id);
-      auth2.attachClickHandler(
-        element,
-        {},
-        function(googleUser) {
-          document.getElementById("name").innerText =
-            "Signed in: " + googleUser.getBasicProfile().getName();
-        },
-        function(error) {
-          alert(JSON.stringify(error, undefined, 2));
-        }
-      );
-    }
   }
 };
 </script>
